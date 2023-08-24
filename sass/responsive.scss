@@ -1,0 +1,29 @@
+
+@media (max-width:530px){
+    .suma_resta{
+        display: flex;
+        flex-direction: column;
+        // border: 1px solid black;
+        align-items: center;  
+        margin-bottom: 10rem;
+
+        #restas{
+            margin-top: 2rem;
+            
+        }
+           
+    }
+    #navegacion{
+        display: flex;
+        flex-direction: column;
+    }
+    
+    
+    
+}
+
+@media (max-width:367px){
+    .presupuesto{
+        text-align: center;
+    }
+}

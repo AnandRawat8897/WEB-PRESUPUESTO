@@ -1,0 +1,105 @@
+.suma_resta{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 3rem;
+    font-size: 70%;
+    margin-bottom: 12rem;
+      
+    
+
+}
+
+#tabla_ingresos{
+    width: 100%;
+       
+}
+#tabla_gastos{
+    width: 100%;
+}
+
+.table_row{
+    
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    font-size:160% ;
+    padding: 0.7rem;
+}
+
+.table_row:nth-child(even){
+    background-color: #eee;
+}
+
+#sumas{
+
+    color: rgb(28,170,181);
+}
+#restas{
+    color: rgb(255,96,74);
+}
+
+.mayuscula_grande::first-letter{
+    font-size: 140%;
+
+}
+
+.linea{
+    margin-top: 1rem;
+    width: 15rem
+}
+.eliminar{
+    transition: transform 2000ms ;
+}
+
+
+.table_row:hover .eliminar{
+
+    // animation: moverIzq 2000ms linear forwards;
+    transform: translateX(-3em);
+    
+
+}
+
+@keyframes aparicion {
+    0% {
+        visibility: hidden;
+        
+      }
+    
+      100% {
+        visibility: visible;
+      }
+      
+
+    
+}
+.table_row:hover  .absoluto{
+
+    
+    animation: aparicion infinite linear 1000ms;
+    animation-delay: 800ms;
+    
+    // visibility: visible;
+
+}
+
+
+.eliminar{
+    position: relative;
+    // z-index: 1;
+}
+.absoluto{
+    visibility: hidden;
+    position: absolute;
+    right: 0;
+    top: 0;
+    // z-index: -1;
+
+}
+
+.padre{
+    position: relative;
+}
+
+
+

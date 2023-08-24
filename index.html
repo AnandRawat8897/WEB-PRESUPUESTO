@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="img/png" href="img/medico.png" />
+    <link rel="stylesheet" href="public/bundle.css" />
+
+    <title>Aplicación gastos</title>
+  </head>
+  <body>
+    <header class="cabecero">
+      <div class="caja">
+        <h1 class="centrar presupuesto">Presupuesto disponible:</h1>
+
+        <h2 class="centrar" id="cantidad_disponible">-</h2>
+
+        <div class="centrar ingresos">
+          <p>Ingresos</p>
+          <p id="ingresos_js">-</p>
+        </div>
+        <div class="centrar gastos" >
+          <p>Gastos</p>
+          <p id="gastos_js">-</p>
+        </div>
+      </div>
+    </header>
+    
+
+    <form id="navegacion">
+      <select name="ingreso_gasto" id="ingreso_gasto" class="elemento_nav">
+        <option value="menos">-</option>
+        <option value="mas">+</option>
+      </select>
+      
+      <input
+        type="text"
+        placeholder="Concepto"
+        class="elemento_nav"
+        id="concepto"
+      />
+      <input
+        type="number"
+        placeholder="Cantidad en euros"
+        class="elemento_nav"
+        id="valor"
+        step="any"
+      />
+
+      <lord-icon
+        id="tick"
+        src="https://cdn.lordicon.com/egiwmiit.json"
+        trigger="hover"
+        colors="primary:#121331"
+        style="width: 2rem; height: 2rem"
+      >
+      </lord-icon>
+    </form>
+
+    <div class="suma_resta">
+      <div id="sumas">
+        <h1 class="mayuscula_grande">INGRESOS</h1>
+        <hr class="linea" />
+        <table id="tabla_ingresos"></table>
+      </div>
+
+      <div id="restas">
+        <h1 class="mayuscula_grande">GASTOS</h1>
+        <hr class="linea" />
+        <table id="tabla_gastos"></table>
+      </div>
+    </div>
+
+    <!-- <footer id="bottom">
+      a
+    </footer> -->
+
+    <script type="text/javascript" src="public/bundle.js"></script>
+    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+    <!-- <script type="text/javascript" src="src/localstorage.js"></script> -->
+
+    <!-- <script type="text/javascript" src="src/concepto.js"></script> -->
+  </body>
+</html>
