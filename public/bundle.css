@@ -80,7 +80,7 @@ body {
   box-shadow: 3px 3px 1px #ddd;
 }
 
-#tick:hover {
+#tick:hover, #close:hover {
   cursor: pointer;
 }
 
