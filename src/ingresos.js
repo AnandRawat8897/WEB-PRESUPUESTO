@@ -8,7 +8,7 @@ const agregarIngresos  = (concepto,cantidad)=>{
     let borraElemento=document.createElement("td");
     
 
-    nuevoIngresoConcepto.innerText =concepto;
+    // nuevoIngresoConcepto.innerText =concepto;
     nuevoIngresoCantidad.innerHTML=`
     
     <p class="eliminar">+ ${parseFloat(cantidad).toLocaleString("es")} €</p>
