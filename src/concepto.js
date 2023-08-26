@@ -28,6 +28,7 @@ let ingresoGasto = () => {
         let ingresosLocalStorage = JSON.parse(localStorage.getItem("ingresos"));
         ingresosLocalStorage.push(ingreso);
         localStorage.setItem("ingresos",JSON.stringify(ingresosLocalStorage));
+        
 
         let sumatorioIngresos = parseFloat(cantidad.value);
         sumaIngresos+=sumatorioIngresos;

@@ -14,15 +14,52 @@ const existeLocalStorage = ()=>{
 
 // const selection = document.querySelector("#ingreso_gasto")
 
-document.getElementById("tabla_ingresos");
+let tablaIngresos = document.getElementById("tabla_ingresos");
 let tablaGastos = document.getElementById("tabla_gastos");
 
 let formulario = document.forms["navegacion"];
 let tipo = formulario["ingreso_gasto"];
 let concepto = formulario["concepto"];
-let cantidad = formulario["valor"];
+let cantidad$1 = formulario["valor"];
 
 let tick = document.getElementById("tick");
+
+const agregarIngresos  = ()=>{
+
+
+
+    let concepto = JSON.parse(localStorage.getItem("ingresos"));
+    let i = concepto.length;
+    console.log(i);
+
+    console.log(concepto);
+
+    let nuevoIngresoRow=document.createElement("tr");
+    let nuevoIngresoConcepto=document.createElement("td");
+    let nuevoIngresoCantidad=document.createElement("td");
+    document.createElement("td");
+    
+
+    nuevoIngresoConcepto.innerText =concepto;
+    nuevoIngresoCantidad.innerHTML=`
+    
+    <p class="eliminar">+ ${parseFloat(cantidad).toLocaleString("es")} €</p>
+    <p class="absoluto"><img src="https://img.icons8.com/?size=100&id=46&format=png" alt="" style="height: 1.3em;"></p>
+    `;
+    
+    
+    nuevoIngresoRow.setAttribute("class","table_row");
+    // nuevoIngresoConcepto.setAttribute("class","eliminar");
+    nuevoIngresoCantidad.setAttribute("class","padre");
+
+    tablaIngresos.appendChild(nuevoIngresoRow);
+    nuevoIngresoRow.appendChild(nuevoIngresoConcepto);
+    nuevoIngresoRow.appendChild(nuevoIngresoCantidad);
+    
+    
+
+    
+};
 
 const restarGastos  = (concepto,cantidad)=>{
 
@@ -63,25 +100,26 @@ let ingresoGasto = () => {
   tick.addEventListener("click", () => {
     existeLocalStorage();
 
-    if (concepto.value !== "" && cantidad.value !== "") {
+    if (concepto.value !== "" && cantidad$1.value !== "") {
       if (tipo.value === "mas") {
 
         
 
-        let ingreso =new Dato(tipo.value,concepto.value,cantidad.value);
+        let ingreso =new Dato(tipo.value,concepto.value,cantidad$1.value);
 
         let ingresosLocalStorage = JSON.parse(localStorage.getItem("ingresos"));
         ingresosLocalStorage.push(ingreso);
         localStorage.setItem("ingresos",JSON.stringify(ingresosLocalStorage));
+        
 
-        let sumatorioIngresos = parseFloat(cantidad.value);
+        let sumatorioIngresos = parseFloat(cantidad$1.value);
         sumaIngresos+=sumatorioIngresos;
         htmlIngresos.innerHTML =sumaIngresos.toLocaleString("es")+ "€";
 
       } else if (tipo.value === "menos") {
-        restarGastos(concepto.value, cantidad.value);
+        restarGastos(concepto.value, cantidad$1.value);
         
-        let sumatorioGastos = parseFloat(cantidad.value);
+        let sumatorioGastos = parseFloat(cantidad$1.value);
         sumaGastos+=sumatorioGastos;
         htmlGastos.innerHTML =sumaGastos.toLocaleString("es")+ "€";
 
@@ -104,4 +142,5 @@ let eliminarTodo =()=>{
 };
 
 ingresoGasto();
+agregarIngresos();
 eliminarTodo();

@@ -5,6 +5,10 @@ const agregarIngresos  = ()=>{
 
 
     let concepto = JSON.parse(localStorage.getItem("ingresos"))
+    let i = concepto.length;
+    console.log(i);
+
+    console.log(concepto);
 
     let nuevoIngresoRow=document.createElement("tr");
     let nuevoIngresoConcepto=document.createElement("td");
