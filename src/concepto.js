@@ -25,9 +25,11 @@ let ingresoGasto = () => {
 
         let ingresosLocalStorage = JSON.parse(localStorage.getItem("ingresos"));
 
-        if(!ingresosLocalStorage){
+        if(!ingresosLocalStorage){          
 
-           window.localStorage.setItem("ingresos",JSON.stringify(ingreso));
+           window.localStorage.setItem("ingresos",JSON.stringify([]));
+           ingresosLocalStorage.push(ingreso);
+           localStorage.setItem("ingresos",JSON.stringify(ingresosLocalStorage));
 
         }else{
 
