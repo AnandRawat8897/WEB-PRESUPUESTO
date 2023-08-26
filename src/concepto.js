@@ -21,17 +21,17 @@ let ingresoGasto = () => {
 
         let ingreso =new Dato(tipo.value,concepto.value,cantidad.value)
         
-
-        let ingresosLocalStorage = JSON.parse(localStorage.getItem("ingresos"))
-        ingresosLocalStorage.push(ingreso);
-        localStorage.setItem("ingresos",JSON.stringify(ingresosLocalStorage))
-        let i= ingresosLocalStorage.length-1;
+        window.localStorage.setItem("ingresos",JSON.stringify(ingreso));
+        // let ingresosLocalStorage = JSON.parse(localStorage.getItem("ingresos"))
+        // ingresosLocalStorage.push(ingreso);
+        // localStorage.setItem("ingresos",JSON.stringify(ingresosLocalStorage))
+        // let i= ingresosLocalStorage.length-1;
 
         console.log(i);
         
-        console.log(ingresosLocalStorage[i].concepto,ingresosLocalStorage[i].cantidad);
+        // console.log(ingresosLocalStorage[i].concepto,ingresosLocalStorage[i].cantidad);
 
-        agregarIngresos(ingresosLocalStorage[i].concepto, ingresosLocalStorage[i].cantidad);
+        // agregarIngresos(ingresosLocalStorage[i].concepto, ingresosLocalStorage[i].cantidad);
 
         let sumatorioIngresos = parseFloat(cantidad.value);
         sumaIngresos+=sumatorioIngresos;
