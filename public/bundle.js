@@ -55,7 +55,7 @@ let ingresoGasto = () => {
     if (concepto.value !== "" && cantidad.value !== "") {
       if (tipo.value === "mas") {
 
-        console.log(localStorage.length);
+        
 
         let ingreso =new Dato(tipo.value,concepto.value,cantidad.value);
 
