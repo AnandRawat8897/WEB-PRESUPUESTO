@@ -1,6 +1,10 @@
 import { tablaIngresos } from "./variablesComunes";
 
-const agregarIngresos  = (concepto,cantidad)=>{
+const agregarIngresos  = ()=>{
+
+
+
+    let concepto = JSON.parse(localStorage.getItem("ingresos"))
 
     let nuevoIngresoRow=document.createElement("tr");
     let nuevoIngresoConcepto=document.createElement("td");
