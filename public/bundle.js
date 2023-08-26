@@ -60,19 +60,10 @@ let ingresoGasto = () => {
         let ingreso =new Dato(tipo.value,concepto.value,cantidad.value);
 
         let ingresosLocalStorage = JSON.parse(localStorage.getItem("ingresos"));
-
-        if(localStorage.length===0){          
-
-           window.localStorage.setItem("ingresos",JSON.stringify([]));
-           ingresosLocalStorage.push(ingreso);
-           localStorage.setItem("ingresos",JSON.stringify(ingresosLocalStorage));
-
-        }else {
-
         ingresosLocalStorage.push(ingreso);
         localStorage.setItem("ingresos",JSON.stringify(ingresosLocalStorage));
+
         
-        }
         
 
 
