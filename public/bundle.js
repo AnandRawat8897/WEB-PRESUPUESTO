@@ -1,5 +1,15 @@
 'use strict';
 
+const existeLocalStorage = ()=>{
+
+    if(localStorage.length===0){
+        window.localStorage.setItem("ingresos",JSON.stringify([]));
+        window.localStorage.setItem("gastos",JSON.stringify([]));
+
+    }
+
+};
+
 // const concept = document.getElementById("concepto")
 
 // const selection = document.querySelector("#ingreso_gasto")
@@ -51,6 +61,7 @@ let cantidadTotal = document.getElementById("cantidad_disponible");
 
 let ingresoGasto = () => {
   tick.addEventListener("click", () => {
+    existeLocalStorage();
 
     if (concepto.value !== "" && cantidad.value !== "") {
       if (tipo.value === "mas") {
@@ -62,16 +73,6 @@ let ingresoGasto = () => {
         let ingresosLocalStorage = JSON.parse(localStorage.getItem("ingresos"));
         ingresosLocalStorage.push(ingreso);
         localStorage.setItem("ingresos",JSON.stringify(ingresosLocalStorage));
-
-        
-        
-
-
-        // console.log(i);
-        
-        // console.log(ingresosLocalStorage[i].concepto,ingresosLocalStorage[i].cantidad);
-
-        // agregarIngresos(ingresosLocalStorage[i].concepto, ingresosLocalStorage[i].cantidad);
 
         let sumatorioIngresos = parseFloat(cantidad.value);
         sumaIngresos+=sumatorioIngresos;
@@ -93,25 +94,14 @@ let ingresoGasto = () => {
 
 };
 
-const existeLocalStorage = ()=>{
-
-    if(localStorage.length===0){
-        window.localStorage.setItem("ingresos",JSON.stringify([]));
-        window.localStorage.setItem("gastos",JSON.stringify([]));
-
-    }
-
-};
-
 let basura = document.getElementById("close");
 
 let eliminarTodo =()=>{
 
     basura.addEventListener("click",()=>{
-        window.localStorage.clear();
+        localStorage.clear();
     });
 };
 
-existeLocalStorage();
 ingresoGasto();
 eliminarTodo();

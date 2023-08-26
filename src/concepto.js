@@ -1,3 +1,4 @@
+import { existeLocalStorage } from "./localStorage";
 
 import { agregarIngresos } from "./ingresos";
 
@@ -15,6 +16,7 @@ let cantidadTotal = document.getElementById("cantidad_disponible")
 
 let ingresoGasto = () => {
   tick.addEventListener("click", () => {
+    existeLocalStorage();
 
     if (concepto.value !== "" && cantidad.value !== "") {
       if (tipo.value === "mas") {
@@ -26,16 +28,6 @@ let ingresoGasto = () => {
         let ingresosLocalStorage = JSON.parse(localStorage.getItem("ingresos"));
         ingresosLocalStorage.push(ingreso);
         localStorage.setItem("ingresos",JSON.stringify(ingresosLocalStorage));
-
-        
-        
-
-
-        // console.log(i);
-        
-        // console.log(ingresosLocalStorage[i].concepto,ingresosLocalStorage[i].cantidad);
-
-        // agregarIngresos(ingresosLocalStorage[i].concepto, ingresosLocalStorage[i].cantidad);
 
         let sumatorioIngresos = parseFloat(cantidad.value);
         sumaIngresos+=sumatorioIngresos;
