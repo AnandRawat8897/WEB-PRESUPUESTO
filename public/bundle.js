@@ -55,15 +55,26 @@ let ingresoGasto = () => {
     if (concepto.value !== "" && cantidad.value !== "") {
       if (tipo.value === "mas") {
 
-        let ingreso =new Dato(tipo.value,concepto.value,cantidad.value);
-        
-        window.localStorage.setItem("ingresos",JSON.stringify(ingreso));
-        // let ingresosLocalStorage = JSON.parse(localStorage.getItem("ingresos"))
-        // ingresosLocalStorage.push(ingreso);
-        // localStorage.setItem("ingresos",JSON.stringify(ingresosLocalStorage))
-        // let i= ingresosLocalStorage.length-1;
+        console.log(localStorage.length);
 
-        console.log(i);
+        let ingreso =new Dato(tipo.value,concepto.value,cantidad.value);
+
+        let ingresosLocalStorage = JSON.parse(localStorage.getItem("ingresos"));
+
+        if(!ingresosLocalStorage){
+
+           window.localStorage.setItem("ingresos",JSON.stringify(ingreso));
+           
+        }else {
+
+        ingresosLocalStorage.push(ingreso);
+        localStorage.setItem("ingresos",JSON.stringify(ingresosLocalStorage));
+        
+        }
+        
+
+
+        // console.log(i);
         
         // console.log(ingresosLocalStorage[i].concepto,ingresosLocalStorage[i].cantidad);
 

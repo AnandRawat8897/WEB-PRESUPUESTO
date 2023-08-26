@@ -21,14 +21,18 @@ let ingresoGasto = () => {
 
         console.log(localStorage.length);
 
-        let ingreso =new Dato(tipo.value,concepto.value,cantidad.value)
-        if(localStorage.length===0){
+        let ingreso =new Dato(tipo.value,concepto.value,cantidad.value);
+
+        let ingresosLocalStorage = JSON.parse(localStorage.getItem("ingresos"));
+
+        if(!ingresosLocalStorage){
+
            window.localStorage.setItem("ingresos",JSON.stringify(ingreso));
+           
         }else{
 
-        let ingresosLocalStorage = JSON.parse(localStorage.getItem("ingresos"))
         ingresosLocalStorage.push(ingreso);
-        localStorage.setItem("ingresos",JSON.stringify(ingresosLocalStorage))
+        localStorage.setItem("ingresos",JSON.stringify(ingresosLocalStorage));
         
         }
         
