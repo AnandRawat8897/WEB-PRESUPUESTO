@@ -27,7 +27,7 @@ let ingresoGasto = () => {
         // localStorage.setItem("ingresos",JSON.stringify(ingresosLocalStorage))
         // let i= ingresosLocalStorage.length-1;
 
-        console.log(i);
+        // console.log(i);
         
         // console.log(ingresosLocalStorage[i].concepto,ingresosLocalStorage[i].cantidad);
 
