@@ -28,14 +28,20 @@ let ingresoGasto = () => {
         localStorage.setItem("ingresos",JSON.stringify(ingresosLocalStorage));
         
 
-        let sumatorioIngresos = parseFloat(cantidad.value);
-        sumaIngresos+=sumatorioIngresos;
-        htmlIngresos.innerHTML =sumaIngresos.toLocaleString("es")+ "€";
+        // let sumatorioIngresos = parseFloat(cantidad.value);
+        // sumaIngresos+=sumatorioIngresos;
+        // htmlIngresos.innerHTML =sumaIngresos.toLocaleString("es")+ "€";
         agregarIngresos();
         
 
       } else if (tipo.value === "menos") {
-        restarGastos(concepto.value, cantidad.value);
+
+        let gasto =new Dato(tipo.value,concepto.value,cantidad.value);
+
+        let gastosLocalStorage = JSON.parse(localStorage.getItem("gastos"));
+        gastosLocalStorage.push(gasto);
+        localStorage.setItem("gastos",JSON.stringify(gastosLocalStorage));
+        
         
         let sumatorioGastos = parseFloat(cantidad.value);
         sumaGastos+=sumatorioGastos;
