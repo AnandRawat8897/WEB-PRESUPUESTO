@@ -19,9 +19,7 @@ let ingresoGasto = () => {
     existeLocalStorage();
 
     if (concepto.value !== "" && cantidad.value !== "") {
-      if (tipo.value === "mas") {
-
-        
+      if (tipo.value === "mas") {       
 
         let ingreso =new Dato(tipo.value,concepto.value,cantidad.value);
 
