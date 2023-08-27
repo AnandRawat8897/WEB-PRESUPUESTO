@@ -5,6 +5,7 @@ const existeLocalStorage = ()=>{
     if(localStorage.length===0){
         window.localStorage.setItem("ingresos",JSON.stringify([]));
         window.localStorage.setItem("gastos",JSON.stringify([]));
+        window.localStorage.setItem("ingresosTotales",0);
 
     }
 
@@ -27,6 +28,8 @@ let tick = document.getElementById("tick");
 const agregarIngresos = () => {
   let contenedorIngresosTabla = document.getElementById("tabla_ingresos");
   let localSt = JSON.parse(localStorage.getItem("ingresos"));
+  let sumaCantidad = 0;
+
   // let i = concepto.length;
 
   //   console.log(localSt);
@@ -58,7 +61,14 @@ const agregarIngresos = () => {
       tablaIngresos.appendChild(nuevoIngresoRow);
       nuevoIngresoRow.appendChild(nuevoIngresoConcepto);
       nuevoIngresoRow.appendChild(nuevoIngresoCantidad);
+      sumaCantidad += parseFloat(cantidad);
+      window.localStorage.setItem("ingresosTotales",sumaCantidad);
+  
+  
     });
+    
+
+   
   } else {
     contenedorIngresosTabla.innerHTML = "";
 
@@ -70,6 +80,10 @@ const agregarIngresos = () => {
     
     `;
   }
+
+  
+  
+  
 };
 
 const restarGastos  = (concepto,cantidad)=>{
