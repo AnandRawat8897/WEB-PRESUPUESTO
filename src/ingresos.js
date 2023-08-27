@@ -5,9 +5,7 @@ const agregarIngresos = () => {
   let localSt = JSON.parse(localStorage.getItem("ingresos"));
   let sumaCantidad = 0;
 
-  // let i = concepto.length;
 
-  //   console.log(localSt);
   if (localSt && localSt.length > 0) {
     contenedorIngresosTabla.innerHTML = "";
 
