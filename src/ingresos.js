@@ -1,37 +1,46 @@
 import { tablaIngresos } from "./variablesComunes";
 
-const agregarIngresos  = ()=>{
+const agregarIngresos = () => {
 
-    
-    let concepto = JSON.parse(localStorage.getItem("ingresos"))
-    let i = concepto.length;
+  let contenedorIngresosTabla = document.getElementById("tabla_ingresos")
+  console.log(contenedorIngresosTabla);
+  let localSt = JSON.parse(localStorage.getItem("ingresos"));
+  // let i = concepto.length;
 
-    
-    
+//   console.log(localSt);
+  if(localSt && localSt.length>0){
 
-    let nuevoIngresoRow=document.createElement("tr");
-    let nuevoIngresoConcepto=document.createElement("td");
-    let nuevoIngresoCantidad=document.createElement("td");
-    let borraElemento=document.createElement("td");
-    
+    contenedorIngresosTabla.innerHTML ="";
 
-    nuevoIngresoConcepto.innerText =concepto;
-    nuevoIngresoCantidad.innerHTML=`
+      localSt.forEach((element) => {
+        let concepto = element.concepto;
+        let cantidad = element.cantidad;
     
-    <p class="eliminar">+ ${parseFloat(cantidad).toLocaleString("es")} €</p>
-    <p class="absoluto"><img src="https://img.icons8.com/?size=100&id=46&format=png" alt="" style="height: 1.3em;"></p>
-    `;
+        let nuevoIngresoRow = document.createElement("tr");
+        let nuevoIngresoConcepto = document.createElement("td");
+        let nuevoIngresoCantidad = document.createElement("td");
+        // let borraElemento = document.createElement("td");
     
+        nuevoIngresoConcepto.innerText = concepto;
+        nuevoIngresoCantidad.innerHTML = `
+            
+            <p class="eliminar">+ ${parseFloat(cantidad).toLocaleString("es")} €</p>
+            <p class="absoluto"><img src="https://img.icons8.com/?size=100&id=46&format=png" alt="" style="height: 1.3em;"></p>
+            `;
     
-    nuevoIngresoRow.setAttribute("class","table_row");
-    // nuevoIngresoConcepto.setAttribute("class","eliminar");
-    nuevoIngresoCantidad.setAttribute("class","padre");
+        nuevoIngresoRow.setAttribute("class", "table_row");
+        // nuevoIngresoConcepto.setAttribute("class","eliminar");
+        nuevoIngresoCantidad.setAttribute("class", "padre");
+    
+        tablaIngresos.appendChild(nuevoIngresoRow);
+        nuevoIngresoRow.appendChild(nuevoIngresoConcepto);
+        nuevoIngresoRow.appendChild(nuevoIngresoCantidad);
+      });
 
-    tablaIngresos.appendChild(nuevoIngresoRow)
-    nuevoIngresoRow.appendChild(nuevoIngresoConcepto);
-    nuevoIngresoRow.appendChild(nuevoIngresoCantidad);    
-}
+  }
+
+};
 
 // agregarIngresos("hola",1200);
 
-export {agregarIngresos};
+export { agregarIngresos };

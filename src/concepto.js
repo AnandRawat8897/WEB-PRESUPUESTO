@@ -33,6 +33,8 @@ let ingresoGasto = () => {
         let sumatorioIngresos = parseFloat(cantidad.value);
         sumaIngresos+=sumatorioIngresos;
         htmlIngresos.innerHTML =sumaIngresos.toLocaleString("es")+ "€";
+        agregarIngresos();
+        
 
       } else if (tipo.value === "menos") {
         restarGastos(concepto.value, cantidad.value);
