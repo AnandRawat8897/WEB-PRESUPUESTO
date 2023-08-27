@@ -26,13 +26,12 @@ let tick = document.getElementById("tick");
 
 const agregarIngresos  = ()=>{
 
-
-
+    
     let concepto = JSON.parse(localStorage.getItem("ingresos"));
-    let i = concepto.length;
-    console.log(i);
+    concepto.length;
 
-    console.log(concepto);
+    
+    
 
     let nuevoIngresoRow=document.createElement("tr");
     let nuevoIngresoConcepto=document.createElement("td");
@@ -54,11 +53,7 @@ const agregarIngresos  = ()=>{
 
     tablaIngresos.appendChild(nuevoIngresoRow);
     nuevoIngresoRow.appendChild(nuevoIngresoConcepto);
-    nuevoIngresoRow.appendChild(nuevoIngresoCantidad);
-    
-    
-
-    
+    nuevoIngresoRow.appendChild(nuevoIngresoCantidad);    
 };
 
 const restarGastos  = (concepto,cantidad)=>{
