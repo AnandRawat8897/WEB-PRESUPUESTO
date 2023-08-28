@@ -8,10 +8,10 @@ import {tick, tipo, concepto, cantidad } from "./variablesComunes";
 
 import Dato from "./clases";
 
+import { guardarPresupuesto } from "./presupuestoTotal";
+
 let sumaIngresos=0,sumaGastos=0;
 
-let htmlIngresos = document.getElementById("ingresos_js")
-let htmlGastos = document.getElementById("gastos_js")
 let cantidadTotal = document.getElementById("cantidad_disponible")
 
 let ingresoGasto = () => {
@@ -28,10 +28,8 @@ let ingresoGasto = () => {
         localStorage.setItem("ingresos",JSON.stringify(ingresosLocalStorage));
         
 
-        // let sumatorioIngresos = parseFloat(cantidad.value);
-        // sumaIngresos+=sumatorioIngresos;
-        // htmlIngresos.innerHTML =sumaIngresos.toLocaleString("es")+ "€";
         agregarIngresos();
+        
         
 
       } else if (tipo.value === "menos") {
@@ -43,9 +41,6 @@ let ingresoGasto = () => {
         localStorage.setItem("gastos",JSON.stringify(gastosLocalStorage));
         
         
-        // let sumatorioGastos = parseFloat(cantidad.value);
-        // sumaGastos+=sumatorioGastos;
-        // htmlGastos.innerHTML =sumaGastos.toLocaleString("es")+ "€";
         restarGastos();
 
       }
@@ -55,6 +50,9 @@ let ingresoGasto = () => {
     }
     concepto.value="";
     cantidad.value="";
+    guardarPresupuesto();
+    
+    
   });
 
 };

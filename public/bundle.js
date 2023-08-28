@@ -87,21 +87,6 @@ const agregarIngresos = () => {
   }
 };
 
-// const restarGastos = (concepto, cantidad) => {
-//   let nuevoGastoRow = document.createElement("tr");
-//   let nuevoGastoConcepto = document.createElement("td");
-//   let nuevoGastoCantidad = document.createElement("td");
-
-//   nuevoGastoConcepto.innerText = concepto;
-//   nuevoGastoCantidad.innerText = `- ${cantidad} €`;
-
-//   nuevoGastoRow.setAttribute("class", "table_row");
-
-//   tablaGastos.appendChild(nuevoGastoRow);
-//   nuevoGastoRow.appendChild(nuevoGastoConcepto);
-//   nuevoGastoRow.appendChild(nuevoGastoCantidad);
-// };
-
 const restarGastos = () => {
   let contenedorGastosTabla = document.getElementById("tabla_gastos");
   let localSt = JSON.parse(localStorage.getItem("gastos"));
@@ -156,7 +141,7 @@ const restarGastos = () => {
       
       `;
 
-      sumaGastos$1.innerHTML = `
+    sumaGastos$1.innerHTML = `
             -   `;
   }
 };
@@ -172,10 +157,26 @@ class Dato{
     
 }
 
+const guardarPresupuesto = () => {
+  let contenedorCantidadDisponible = document.getElementById(
+    "cantidad_disponible"
+  );
+  let ingresoT = window.localStorage.getItem("ingresosTotales");
+  let gastoT = window.localStorage.getItem("gastosTotales");
+
+  if (ingresoT > 0 || gastoT > 0) {
+    let presupuestoFinal = ingresoT - gastoT;
+    window.localStorage.setItem("presupuestoFinal", presupuestoFinal);
+    let presupuestoLS = window.localStorage.getItem("presupuestoFinal");
+
+    contenedorCantidadDisponible.innerHTML = `${presupuestoLS} €`;
+  } else {
+    contenedorCantidadDisponible.innerHTML = `-`;
+  }
+};
+
 let sumaIngresos=0,sumaGastos=0;
 
-document.getElementById("ingresos_js");
-document.getElementById("gastos_js");
 let cantidadTotal = document.getElementById("cantidad_disponible");
 
 let ingresoGasto = () => {
@@ -192,10 +193,8 @@ let ingresoGasto = () => {
         localStorage.setItem("ingresos",JSON.stringify(ingresosLocalStorage));
         
 
-        // let sumatorioIngresos = parseFloat(cantidad.value);
-        // sumaIngresos+=sumatorioIngresos;
-        // htmlIngresos.innerHTML =sumaIngresos.toLocaleString("es")+ "€";
         agregarIngresos();
+        
         
 
       } else if (tipo.value === "menos") {
@@ -207,9 +206,6 @@ let ingresoGasto = () => {
         localStorage.setItem("gastos",JSON.stringify(gastosLocalStorage));
         
         
-        // let sumatorioGastos = parseFloat(cantidad.value);
-        // sumaGastos+=sumatorioGastos;
-        // htmlGastos.innerHTML =sumaGastos.toLocaleString("es")+ "€";
         restarGastos();
 
       }
@@ -219,6 +215,9 @@ let ingresoGasto = () => {
     }
     concepto.value="";
     cantidad.value="";
+    guardarPresupuesto();
+    
+    
   });
 
 };
@@ -232,6 +231,7 @@ let eliminarTodo =()=>{
         window.localStorage.clear();
         agregarIngresos();
         restarGastos();
+        guardarPresupuesto();
     });
 };
 
@@ -239,3 +239,4 @@ ingresoGasto();
 agregarIngresos();
 restarGastos();
 eliminarTodo();
+guardarPresupuesto();

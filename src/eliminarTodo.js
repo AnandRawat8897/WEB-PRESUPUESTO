@@ -1,5 +1,6 @@
 import { agregarIngresos } from "./ingresos";
 import { restarGastos } from "./gastos";
+import { guardarPresupuesto } from "./presupuestoTotal";
 let basura = document.getElementById("close");
 
 let eliminarTodo =()=>{
@@ -9,6 +10,7 @@ let eliminarTodo =()=>{
         window.localStorage.clear();
         agregarIngresos();
         restarGastos();
+        guardarPresupuesto();
     })
 }
 

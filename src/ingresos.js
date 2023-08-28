@@ -58,6 +58,5 @@ const agregarIngresos = () => {
   }
 };
 
-// agregarIngresos("hola",1200);
 
 export { agregarIngresos };
