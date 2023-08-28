@@ -12,5 +12,8 @@ let cantidad = formulario["valor"];
 
 let tick = document.getElementById("tick");
 
+let sumaGastos = document.getElementById("gastos_js");
+let sumaIngresos = document.getElementById("ingresos_js");
 
-export {tick,formulario,tipo,concepto,cantidad,tablaGastos,tablaIngresos}
+
+export {sumaIngresos,sumaGastos,tick,formulario,tipo,concepto,cantidad,tablaGastos,tablaIngresos}

@@ -134,7 +134,7 @@ body {
 }
 
 .eliminar {
-  transition: transform 2000ms;
+  transition: transform 1400ms;
 }
 
 .table_row:hover .eliminar {
@@ -150,8 +150,8 @@ body {
   }
 }
 .table_row:hover .absoluto {
-  animation: aparicion infinite linear 1000ms;
-  animation-delay: 800ms;
+  animation: aparicion infinite linear 100ms;
+  animation-delay: 500ms;
 }
 
 .eliminar {

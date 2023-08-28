@@ -1,6 +1,6 @@
 "use strict";
 
-import { tablaGastos } from "./variablesComunes";
+import { tablaGastos,sumaGastos } from "./variablesComunes";
 
 // const restarGastos = (concepto, cantidad) => {
 //   let nuevoGastoRow = document.createElement("tr");
@@ -18,17 +18,14 @@ import { tablaGastos } from "./variablesComunes";
 // };
 
 const restarGastos = () => {
-
   let contenedorGastosTabla = document.getElementById("tabla_gastos");
   let localSt = JSON.parse(localStorage.getItem("gastos"));
   let sumaCantidad = 0;
 
   if (localSt && localSt.length > 0) {
-
     contenedorGastosTabla.innerHTML = "";
 
     localSt.forEach((element) => {
-        
       let concepto = element.concepto;
       let cantidad = element.cantidad;
 
@@ -40,7 +37,7 @@ const restarGastos = () => {
       nuevoGastoConcepto.innerText = concepto;
       nuevoGastoCantidad.innerHTML = `
               
-              <p class="eliminar">+ ${parseFloat(-cantidad).toLocaleString(
+              <p class="eliminar">- ${parseFloat(cantidad).toLocaleString(
                 "es"
               )} €</p>
               <p class="absoluto"><img src="https://img.icons8.com/?size=100&id=46&format=png" alt="" style="height: 1.3em;"></p>
@@ -54,9 +51,15 @@ const restarGastos = () => {
       nuevoGastoRow.appendChild(nuevoGastoConcepto);
       nuevoGastoRow.appendChild(nuevoGastoCantidad);
       sumaCantidad += parseFloat(cantidad);
-      window.localStorage.setItem("gastosTotales", sumaCantidad);
-    });
 
+      window.localStorage.setItem("gastosTotales", sumaCantidad);
+      let gastosPantallaTotal = window.localStorage.getItem(
+        "gastosTotales",
+        sumaCantidad
+      );
+      sumaGastos.innerHTML = `
+            ${gastosPantallaTotal} €  `;
+    });
   } else {
     contenedorGastosTabla.innerHTML = "";
 
@@ -67,6 +70,9 @@ const restarGastos = () => {
   
       
       `;
+
+      sumaGastos.innerHTML = `
+            -   `;
   }
 };
 

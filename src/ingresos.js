@@ -1,10 +1,9 @@
-import { tablaIngresos } from "./variablesComunes";
+import { tablaIngresos, sumaIngresos } from "./variablesComunes";
 
 const agregarIngresos = () => {
   let contenedorIngresosTabla = document.getElementById("tabla_ingresos");
   let localSt = JSON.parse(localStorage.getItem("ingresos"));
   let sumaCantidad = 0;
-
 
   if (localSt && localSt.length > 0) {
     contenedorIngresosTabla.innerHTML = "";
@@ -35,28 +34,28 @@ const agregarIngresos = () => {
       nuevoIngresoRow.appendChild(nuevoIngresoConcepto);
       nuevoIngresoRow.appendChild(nuevoIngresoCantidad);
       sumaCantidad += parseFloat(cantidad);
-      window.localStorage.setItem("ingresosTotales",sumaCantidad)
-  
-  
-    });
-    
 
-   
+      window.localStorage.setItem("ingresosTotales", sumaCantidad);
+      let ingresosPantallaTotal = window.localStorage.getItem(
+        "ingresosTotales",
+        sumaCantidad
+      );
+      sumaIngresos.innerHTML = `
+            ${ingresosPantallaTotal} €  `;
+    });
   } else {
+    
     contenedorIngresosTabla.innerHTML = "";
 
     contenedorIngresosTabla.innerHTML = `
     <tr class="table_row">
     <td>No hay ingresos</td>
-    </tr>
-
-    
+    </tr>    
     `;
-  }
 
-  
-  
-  
+    sumaIngresos.innerHTML = `
+            -   `;
+  }
 };
 
 // agregarIngresos("hola",1200);

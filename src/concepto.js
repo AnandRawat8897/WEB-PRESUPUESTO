@@ -43,15 +43,18 @@ let ingresoGasto = () => {
         localStorage.setItem("gastos",JSON.stringify(gastosLocalStorage));
         
         
-        let sumatorioGastos = parseFloat(cantidad.value);
-        sumaGastos+=sumatorioGastos;
-        htmlGastos.innerHTML =sumaGastos.toLocaleString("es")+ "€";
+        // let sumatorioGastos = parseFloat(cantidad.value);
+        // sumaGastos+=sumatorioGastos;
+        // htmlGastos.innerHTML =sumaGastos.toLocaleString("es")+ "€";
+        restarGastos();
 
       }
 
       let sobrante=sumaIngresos-sumaGastos;
       cantidadTotal.innerHTML = sobrante+ "€";
     }
+    concepto.value="";
+    cantidad.value="";
   });
 
 };
