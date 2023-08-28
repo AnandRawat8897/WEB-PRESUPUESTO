@@ -15,7 +15,6 @@ const agregarIngresos = () => {
       let nuevoIngresoRow = document.createElement("tr");
       let nuevoIngresoConcepto = document.createElement("td");
       let nuevoIngresoCantidad = document.createElement("td");
-      // let borraElemento = document.createElement("td");
 
       nuevoIngresoConcepto.innerText = concepto;
       nuevoIngresoCantidad.innerHTML = `
@@ -27,7 +26,6 @@ const agregarIngresos = () => {
             `;
 
       nuevoIngresoRow.setAttribute("class", "table_row");
-      // nuevoIngresoConcepto.setAttribute("class","eliminar");
       nuevoIngresoCantidad.setAttribute("class", "padre");
 
       tablaIngresos.appendChild(nuevoIngresoRow);
@@ -44,7 +42,6 @@ const agregarIngresos = () => {
             ${ingresosPantallaTotal} €  `;
     });
   } else {
-    
     contenedorIngresosTabla.innerHTML = "";
 
     contenedorIngresosTabla.innerHTML = `
@@ -57,6 +54,5 @@ const agregarIngresos = () => {
             -   `;
   }
 };
-
 
 export { agregarIngresos };

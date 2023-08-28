@@ -12,10 +12,6 @@ const existeLocalStorage = ()=>{
 
 };
 
-// const concept = document.getElementById("concepto")
-
-// const selection = document.querySelector("#ingreso_gasto")
-
 let tablaIngresos = document.getElementById("tabla_ingresos");
 let tablaGastos = document.getElementById("tabla_gastos");
 
@@ -26,8 +22,8 @@ let cantidad = formulario["valor"];
 
 let tick = document.getElementById("tick");
 
-let sumaGastos$1 = document.getElementById("gastos_js");
-let sumaIngresos$1 = document.getElementById("ingresos_js");
+let sumaGastos = document.getElementById("gastos_js");
+let sumaIngresos = document.getElementById("ingresos_js");
 
 const agregarIngresos = () => {
   let contenedorIngresosTabla = document.getElementById("tabla_ingresos");
@@ -44,7 +40,6 @@ const agregarIngresos = () => {
       let nuevoIngresoRow = document.createElement("tr");
       let nuevoIngresoConcepto = document.createElement("td");
       let nuevoIngresoCantidad = document.createElement("td");
-      // let borraElemento = document.createElement("td");
 
       nuevoIngresoConcepto.innerText = concepto;
       nuevoIngresoCantidad.innerHTML = `
@@ -56,7 +51,6 @@ const agregarIngresos = () => {
             `;
 
       nuevoIngresoRow.setAttribute("class", "table_row");
-      // nuevoIngresoConcepto.setAttribute("class","eliminar");
       nuevoIngresoCantidad.setAttribute("class", "padre");
 
       tablaIngresos.appendChild(nuevoIngresoRow);
@@ -69,11 +63,10 @@ const agregarIngresos = () => {
         "ingresosTotales",
         sumaCantidad
       );
-      sumaIngresos$1.innerHTML = `
+      sumaIngresos.innerHTML = `
             ${ingresosPantallaTotal} €  `;
     });
   } else {
-    
     contenedorIngresosTabla.innerHTML = "";
 
     contenedorIngresosTabla.innerHTML = `
@@ -82,7 +75,7 @@ const agregarIngresos = () => {
     </tr>    
     `;
 
-    sumaIngresos$1.innerHTML = `
+    sumaIngresos.innerHTML = `
             -   `;
   }
 };
@@ -102,7 +95,7 @@ const restarGastos = () => {
       let nuevoGastoRow = document.createElement("tr");
       let nuevoGastoConcepto = document.createElement("td");
       let nuevoGastoCantidad = document.createElement("td");
-      // let borraElemento = document.createElement("td");
+     
 
       nuevoGastoConcepto.innerText = concepto;
       nuevoGastoCantidad.innerHTML = `
@@ -114,7 +107,6 @@ const restarGastos = () => {
               `;
 
       nuevoGastoRow.setAttribute("class", "table_row");
-      // nuevoIngresoConcepto.setAttribute("class","eliminar");
       nuevoGastoCantidad.setAttribute("class", "padre");
 
       tablaGastos.appendChild(nuevoGastoRow);
@@ -127,7 +119,7 @@ const restarGastos = () => {
         "gastosTotales",
         sumaCantidad
       );
-      sumaGastos$1.innerHTML = `
+      sumaGastos.innerHTML = `
             ${gastosPantallaTotal} €  `;
     });
   } else {
@@ -141,7 +133,7 @@ const restarGastos = () => {
       
       `;
 
-    sumaGastos$1.innerHTML = `
+    sumaGastos.innerHTML = `
             -   `;
   }
 };
@@ -175,64 +167,46 @@ const guardarPresupuesto = () => {
   }
 };
 
-let sumaIngresos=0,sumaGastos=0;
-
-let cantidadTotal = document.getElementById("cantidad_disponible");
-
 let ingresoGasto = () => {
   tick.addEventListener("click", () => {
     existeLocalStorage();
 
     if (concepto.value !== "" && cantidad.value !== "") {
-      if (tipo.value === "mas") {       
-
-        let ingreso =new Dato(tipo.value,concepto.value,cantidad.value);
+      if (tipo.value === "mas") {
+        let ingreso = new Dato(tipo.value, concepto.value, cantidad.value);
 
         let ingresosLocalStorage = JSON.parse(localStorage.getItem("ingresos"));
         ingresosLocalStorage.push(ingreso);
-        localStorage.setItem("ingresos",JSON.stringify(ingresosLocalStorage));
-        
+        localStorage.setItem("ingresos", JSON.stringify(ingresosLocalStorage));
 
         agregarIngresos();
-        
-        
-
       } else if (tipo.value === "menos") {
-
-        let gasto =new Dato(tipo.value,concepto.value,cantidad.value);
+        let gasto = new Dato(tipo.value, concepto.value, cantidad.value);
 
         let gastosLocalStorage = JSON.parse(localStorage.getItem("gastos"));
         gastosLocalStorage.push(gasto);
-        localStorage.setItem("gastos",JSON.stringify(gastosLocalStorage));
-        
-        
-        restarGastos();
+        localStorage.setItem("gastos", JSON.stringify(gastosLocalStorage));
 
+        restarGastos();
       }
 
-      let sobrante=sumaIngresos-sumaGastos;
-      cantidadTotal.innerHTML = sobrante+ "€";
     }
-    concepto.value="";
-    cantidad.value="";
+    concepto.value = "";
+    cantidad.value = "";
     guardarPresupuesto();
-    
-    
-  });
 
+  });
 };
 
 let basura = document.getElementById("close");
 
-let eliminarTodo =()=>{
-    document.getElementById("tabla_ingresos");
-
-    basura.addEventListener("click",()=>{
-        window.localStorage.clear();
-        agregarIngresos();
-        restarGastos();
-        guardarPresupuesto();
-    });
+let eliminarTodo = () => {
+  basura.addEventListener("click", () => {
+    window.localStorage.clear();
+    agregarIngresos();
+    restarGastos();
+    guardarPresupuesto();
+  });
 };
 
 ingresoGasto();

@@ -1,7 +1,3 @@
-// const concept = document.getElementById("concepto")
-
-// const selection = document.querySelector("#ingreso_gasto")
-
 let tablaIngresos = document.getElementById("tabla_ingresos")
 let tablaGastos = document.getElementById("tabla_gastos")
 

@@ -3,15 +3,13 @@ import { restarGastos } from "./gastos";
 import { guardarPresupuesto } from "./presupuestoTotal";
 let basura = document.getElementById("close");
 
-let eliminarTodo =()=>{
-    let contenedorIngresosTabla = document.getElementById("tabla_ingresos");
+let eliminarTodo = () => {
+  basura.addEventListener("click", () => {
+    window.localStorage.clear();
+    agregarIngresos();
+    restarGastos();
+    guardarPresupuesto();
+  });
+};
 
-    basura.addEventListener("click",()=>{
-        window.localStorage.clear();
-        agregarIngresos();
-        restarGastos();
-        guardarPresupuesto();
-    })
-}
-
-export {eliminarTodo};
+export { eliminarTodo };

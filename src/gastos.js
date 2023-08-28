@@ -18,7 +18,7 @@ const restarGastos = () => {
       let nuevoGastoRow = document.createElement("tr");
       let nuevoGastoConcepto = document.createElement("td");
       let nuevoGastoCantidad = document.createElement("td");
-      // let borraElemento = document.createElement("td");
+     
 
       nuevoGastoConcepto.innerText = concepto;
       nuevoGastoCantidad.innerHTML = `
@@ -30,7 +30,6 @@ const restarGastos = () => {
               `;
 
       nuevoGastoRow.setAttribute("class", "table_row");
-      // nuevoIngresoConcepto.setAttribute("class","eliminar");
       nuevoGastoCantidad.setAttribute("class", "padre");
 
       tablaGastos.appendChild(nuevoGastoRow);
