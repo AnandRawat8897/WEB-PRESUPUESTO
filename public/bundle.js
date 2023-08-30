@@ -7,6 +7,7 @@ const existeLocalStorage = ()=>{
         window.localStorage.setItem("gastos",JSON.stringify([]));
         window.localStorage.setItem("ingresosTotales",0);
         window.localStorage.setItem("gastosTotales",0);
+        
 
     }
 
@@ -30,6 +31,9 @@ const agregarIngresos = () => {
   let localSt = JSON.parse(localStorage.getItem("ingresos"));
   let sumaCantidad = 0;
 
+  
+  
+
   if (localSt && localSt.length > 0) {
     contenedorIngresosTabla.innerHTML = "";
 
@@ -47,7 +51,7 @@ const agregarIngresos = () => {
             <p class="eliminar">+ ${parseFloat(cantidad).toLocaleString(
               "es"
             )} €</p>
-            <p class="absoluto"><img src="https://img.icons8.com/?size=100&id=46&format=png" alt="" style="height: 1.3em;"></p>
+            <p class="absoluto""><img src="https://img.icons8.com/?size=100&id=46&format=png" alt="" style="height: 1.3em;"></p>
             `;
 
       nuevoIngresoRow.setAttribute("class", "table_row");
@@ -141,6 +145,7 @@ const restarGastos = () => {
 class Dato{
 
     constructor(tipo,concepto,cantidad){
+        
         this.tipo = tipo;
         this.concepto=concepto;
         this.cantidad=cantidad;
@@ -148,6 +153,24 @@ class Dato{
     }
     
 }
+
+// export class Ingreso extends Dato{
+//     constructor(id,tipo,concepto,cantidad){
+//         super(tipo,concepto,cantidad);
+//         this.id = id;
+
+//     }
+// }
+
+// export class Gasto extends Dato{
+//     constructor(id,tipo,concepto,cantidad){
+//         super(tipo,concepto,cantidad);
+//         this.id = id;
+
+//     }
+// }
+
+// export default {Dato, Gasto, Ingreso};
 
 const guardarPresupuesto = () => {
   let contenedorCantidadDisponible = document.getElementById(
@@ -170,6 +193,9 @@ const guardarPresupuesto = () => {
 let ingresoGasto = () => {
   tick.addEventListener("click", () => {
     existeLocalStorage();
+    
+    
+    
 
     if (concepto.value !== "" && cantidad.value !== "") {
       if (tipo.value === "mas") {
@@ -180,6 +206,8 @@ let ingresoGasto = () => {
         localStorage.setItem("ingresos", JSON.stringify(ingresosLocalStorage));
 
         agregarIngresos();
+        
+
       } else if (tipo.value === "menos") {
         let gasto = new Dato(tipo.value, concepto.value, cantidad.value);
 
@@ -188,6 +216,8 @@ let ingresoGasto = () => {
         localStorage.setItem("gastos", JSON.stringify(gastosLocalStorage));
 
         restarGastos();
+        
+
       }
 
     }

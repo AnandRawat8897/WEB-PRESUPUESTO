@@ -10,3 +10,12 @@ agregarIngresos();
 restarGastos();
 eliminarTodo();
 guardarPresupuesto();
+
+
+
+let tabla = document.getElementById
+    
+
+
+
+
