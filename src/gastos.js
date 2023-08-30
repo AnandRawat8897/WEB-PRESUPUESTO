@@ -30,6 +30,7 @@ const restarGastos = () => {
               `;
 
       nuevoGastoRow.setAttribute("class", "table_row");
+      nuevoGastoRow.setAttribute("id", `${element.id}`);
       nuevoGastoCantidad.setAttribute("class", "padre");
 
       tablaGastos.appendChild(nuevoGastoRow);

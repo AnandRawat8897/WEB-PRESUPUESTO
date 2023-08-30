@@ -3,9 +3,8 @@ import { tablaIngresos, sumaIngresos } from "./variablesComunes";
 const agregarIngresos = () => {
   let contenedorIngresosTabla = document.getElementById("tabla_ingresos");
   let localSt = JSON.parse(localStorage.getItem("ingresos"));
+  // console.log(localSt[localSt.length-1].id);
   let sumaCantidad = 0;
-
-  
   
 
   if (localSt && localSt.length > 0) {
@@ -25,10 +24,11 @@ const agregarIngresos = () => {
             <p class="eliminar">+ ${parseFloat(cantidad).toLocaleString(
               "es"
             )} €</p>
-            <p class="absoluto""><img src="https://img.icons8.com/?size=100&id=46&format=png" alt="" style="height: 1.3em;"></p>
+            <p class="absoluto"><img class="btn-eliminar" src="https://img.icons8.com/?size=100&id=46&format=png" alt="" style="height: 1.3em;"></p>
             `;
 
       nuevoIngresoRow.setAttribute("class", "table_row");
+      nuevoIngresoRow.setAttribute("id", `${element.id}`);
       nuevoIngresoCantidad.setAttribute("class", "padre");
 
       tablaIngresos.appendChild(nuevoIngresoRow);

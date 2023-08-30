@@ -7,13 +7,14 @@ const existeLocalStorage = ()=>{
         window.localStorage.setItem("gastos",JSON.stringify([]));
         window.localStorage.setItem("ingresosTotales",0);
         window.localStorage.setItem("gastosTotales",0);
+        window.localStorage.setItem("id",0);
         
 
     }
 
 };
 
-let tablaIngresos = document.getElementById("tabla_ingresos");
+let tablaIngresos$1 = document.getElementById("tabla_ingresos");
 let tablaGastos = document.getElementById("tabla_gastos");
 
 let formulario = document.forms["navegacion"];
@@ -29,9 +30,8 @@ let sumaIngresos = document.getElementById("ingresos_js");
 const agregarIngresos = () => {
   let contenedorIngresosTabla = document.getElementById("tabla_ingresos");
   let localSt = JSON.parse(localStorage.getItem("ingresos"));
+  // console.log(localSt[localSt.length-1].id);
   let sumaCantidad = 0;
-
-  
   
 
   if (localSt && localSt.length > 0) {
@@ -51,13 +51,14 @@ const agregarIngresos = () => {
             <p class="eliminar">+ ${parseFloat(cantidad).toLocaleString(
               "es"
             )} €</p>
-            <p class="absoluto""><img src="https://img.icons8.com/?size=100&id=46&format=png" alt="" style="height: 1.3em;"></p>
+            <p class="absoluto"><img class="btn-eliminar" src="https://img.icons8.com/?size=100&id=46&format=png" alt="" style="height: 1.3em;"></p>
             `;
 
       nuevoIngresoRow.setAttribute("class", "table_row");
+      nuevoIngresoRow.setAttribute("id", `${element.id}`);
       nuevoIngresoCantidad.setAttribute("class", "padre");
 
-      tablaIngresos.appendChild(nuevoIngresoRow);
+      tablaIngresos$1.appendChild(nuevoIngresoRow);
       nuevoIngresoRow.appendChild(nuevoIngresoConcepto);
       nuevoIngresoRow.appendChild(nuevoIngresoCantidad);
       sumaCantidad += parseFloat(cantidad);
@@ -111,6 +112,7 @@ const restarGastos = () => {
               `;
 
       nuevoGastoRow.setAttribute("class", "table_row");
+      nuevoGastoRow.setAttribute("id", `${element.id}`);
       nuevoGastoCantidad.setAttribute("class", "padre");
 
       tablaGastos.appendChild(nuevoGastoRow);
@@ -154,21 +156,21 @@ class Dato{
     
 }
 
-// export class Ingreso extends Dato{
-//     constructor(id,tipo,concepto,cantidad){
-//         super(tipo,concepto,cantidad);
-//         this.id = id;
+class Ingreso extends Dato{
+    constructor(id,tipo,concepto,cantidad){
+        super(tipo,concepto,cantidad);
+        this.id = id;
 
-//     }
-// }
+    }
+}
 
-// export class Gasto extends Dato{
-//     constructor(id,tipo,concepto,cantidad){
-//         super(tipo,concepto,cantidad);
-//         this.id = id;
+class Gasto extends Dato{
+    constructor(id,tipo,concepto,cantidad){
+        super(tipo,concepto,cantidad);
+        this.id = id;
 
-//     }
-// }
+    }
+}
 
 // export default {Dato, Gasto, Ingreso};
 
@@ -193,13 +195,13 @@ const guardarPresupuesto = () => {
 let ingresoGasto = () => {
   tick.addEventListener("click", () => {
     existeLocalStorage();
+    let id = window.localStorage.getItem("id");
     
     
-    
-
     if (concepto.value !== "" && cantidad.value !== "") {
       if (tipo.value === "mas") {
-        let ingreso = new Dato(tipo.value, concepto.value, cantidad.value);
+        
+        let ingreso = new Ingreso(id,tipo.value, concepto.value, cantidad.value);
 
         let ingresosLocalStorage = JSON.parse(localStorage.getItem("ingresos"));
         ingresosLocalStorage.push(ingreso);
@@ -207,9 +209,11 @@ let ingresoGasto = () => {
 
         agregarIngresos();
         
+        
+        
 
       } else if (tipo.value === "menos") {
-        let gasto = new Dato(tipo.value, concepto.value, cantidad.value);
+        let gasto = new Gasto(id,tipo.value, concepto.value, cantidad.value);
 
         let gastosLocalStorage = JSON.parse(localStorage.getItem("gastos"));
         gastosLocalStorage.push(gasto);
@@ -217,8 +221,14 @@ let ingresoGasto = () => {
 
         restarGastos();
         
+        
 
       }
+      
+      id++;
+      window.localStorage.setItem("id",id);
+
+
 
     }
     concepto.value = "";
@@ -244,3 +254,40 @@ agregarIngresos();
 restarGastos();
 eliminarTodo();
 guardarPresupuesto();
+
+
+
+let tablaIngresos = document.getElementById("tabla_ingresos");
+
+tablaIngresos.addEventListener("click",(e)=>{
+
+    
+    if(e.target.matches(".btn-eliminar")){
+        
+        let id = e.target.closest(".table_row").id;
+        // console.log(id);
+        let LS = JSON.parse(window.localStorage.getItem("ingresos"));
+        LS.forEach((elemento)=>{
+
+            let idLS = elemento.id;
+            
+            LS.filter((elemento)=>{
+                if(id!=idLS){
+                    console.log(idLS);
+                }
+            });
+        });
+
+                
+    
+                
+
+        
+
+
+        
+        // if(id)
+        
+    }
+
+});
