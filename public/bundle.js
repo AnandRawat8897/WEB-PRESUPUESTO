@@ -31,8 +31,8 @@ const agregarIngresos = () => {
   let contenedorIngresosTabla = document.getElementById("tabla_ingresos");
   let localSt = JSON.parse(localStorage.getItem("ingresos"));
   // console.log(localSt[localSt.length-1].id);
-  let sumaCantidad = 0;
-  
+  let sumaCantidad = 0; 
+  // MIRAR ESTO DE SUMACANTIDAD MÑAANA
 
   if (localSt && localSt.length > 0) {
     contenedorIngresosTabla.innerHTML = "";
@@ -73,7 +73,8 @@ const agregarIngresos = () => {
     });
   } else {
     contenedorIngresosTabla.innerHTML = "";
-
+    
+    // window.localStorage.setItem("ingresosTotales", sumaCantidad);
     contenedorIngresosTabla.innerHTML = `
     <tr class="table_row">
     <td>No hay ingresos</td>
@@ -196,6 +197,7 @@ let ingresoGasto = () => {
   tick.addEventListener("click", () => {
     existeLocalStorage();
     let id = window.localStorage.getItem("id");
+    // window.localStorage.clear();
     
     
     if (concepto.value !== "" && cantidad.value !== "") {
@@ -255,39 +257,32 @@ restarGastos();
 eliminarTodo();
 guardarPresupuesto();
 
-
-
 let tablaIngresos = document.getElementById("tabla_ingresos");
 
-tablaIngresos.addEventListener("click",(e)=>{
+tablaIngresos.addEventListener("click", (e) => {
+  if (e.target.matches(".btn-eliminar")) {
+    let id = e.target.closest(".table_row").id;
 
+    let LS = JSON.parse(window.localStorage.getItem("ingresos"));
+    console.log(LS);
+
+    let nuevoLS = LS.filter((elemento) => {
+      let idLS = elemento.id;
+
+      if (id != idLS && LS.length > 0) {
+        return elemento;       
+      } 
+
+    });
     
-    if(e.target.matches(".btn-eliminar")){
-        
-        let id = e.target.closest(".table_row").id;
-        // console.log(id);
-        let LS = JSON.parse(window.localStorage.getItem("ingresos"));
-        LS.forEach((elemento)=>{
+    console.log(nuevoLS);
+    let nuevoLSJSON = JSON.stringify(nuevoLS);
+    console.log(nuevoLSJSON);
+    window.localStorage.setItem("ingresos",nuevoLSJSON);
 
-            let idLS = elemento.id;
-            
-            LS.filter((elemento)=>{
-                if(id!=idLS){
-                    console.log(idLS);
-                }
-            });
-        });
+  }
 
-                
-    
-                
-
-        
-
-
-        
-        // if(id)
-        
-    }
-
+  agregarIngresos();
+  guardarPresupuesto();
+ 
 });

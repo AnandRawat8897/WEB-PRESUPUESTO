@@ -11,6 +11,7 @@ let ingresoGasto = () => {
   tick.addEventListener("click", () => {
     existeLocalStorage();
     let id = window.localStorage.getItem("id");
+    // window.localStorage.clear();
     
     
     if (concepto.value !== "" && cantidad.value !== "") {
