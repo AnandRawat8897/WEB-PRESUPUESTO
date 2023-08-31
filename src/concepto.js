@@ -8,8 +8,8 @@ import { Dato,Ingreso,Gasto } from "./clases";
 import { guardarPresupuesto } from "./presupuestoTotal";
 
 let ingresoGasto = () => {
+  existeLocalStorage();
   tick.addEventListener("click", () => {
-    existeLocalStorage();
     let id = window.localStorage.getItem("id");
     // window.localStorage.clear();
     

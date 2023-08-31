@@ -194,8 +194,8 @@ const guardarPresupuesto = () => {
 };
 
 let ingresoGasto = () => {
+  existeLocalStorage();
   tick.addEventListener("click", () => {
-    existeLocalStorage();
     let id = window.localStorage.getItem("id");
     // window.localStorage.clear();
     
@@ -248,6 +248,7 @@ let eliminarTodo = () => {
     agregarIngresos();
     restarGastos();
     guardarPresupuesto();
+    existeLocalStorage();
   });
 };
 
@@ -281,8 +282,8 @@ tablaIngresos.addEventListener("click", (e) => {
     window.localStorage.setItem("ingresos",nuevoLSJSON);
 
   }
-
   agregarIngresos();
   guardarPresupuesto();
+
  
 });

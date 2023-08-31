@@ -34,8 +34,8 @@ tablaIngresos.addEventListener("click", (e) => {
     window.localStorage.setItem("ingresos",nuevoLSJSON)
 
   }
-
   agregarIngresos();
   guardarPresupuesto();
+
  
 });
