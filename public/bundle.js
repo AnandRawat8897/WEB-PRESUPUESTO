@@ -1,20 +1,21 @@
 'use strict';
 
-const existeLocalStorage = ()=>{
-    let ingresos = window.localStorage.getItem("ingresos");
-    let gastos = window.localStorage.getItem("gastos");
+const existeLocalStorage = () => {
+  let ingresos = window.localStorage.getItem("ingresos");
+  let gastos = window.localStorage.getItem("gastos");
 
-    if(localStorage.length===0 || (!ingresos && !gastos) || (ingresos.length===0 && gastos.length===0) ){
-    window.localStorage.setItem("ingresos",JSON.stringify([]));
-        window.localStorage.setItem("gastos",JSON.stringify([]));
-        window.localStorage.setItem("ingresosTotales",0);
-        window.localStorage.setItem("gastosTotales",0);
-        window.localStorage.setItem("id",0);
-        window.localStorage.setItem("presupuestoFinal",0);
-        
-
-    }
-
+  if (
+    localStorage.length === 0 ||
+    (!ingresos && !gastos) ||
+    (ingresos.length === 0 && gastos.length === 0)
+  ) {
+    window.localStorage.setItem("ingresos", JSON.stringify([]));
+    window.localStorage.setItem("gastos", JSON.stringify([]));
+    window.localStorage.setItem("ingresosTotales", 0);
+    window.localStorage.setItem("gastosTotales", 0);
+    window.localStorage.setItem("id", 0);
+    window.localStorage.setItem("presupuestoFinal", 0);
+  }
 };
 
 let tablaIngresos = document.getElementById("tabla_ingresos");
@@ -33,10 +34,8 @@ let sumaIngresos = document.getElementById("ingresos_js");
 const agregarIngresos = () => {
   let contenedorIngresosTabla = document.getElementById("tabla_ingresos");
   let localSt = JSON.parse(localStorage.getItem("ingresos"));
-  // console.log(localSt[localSt.length-1].id);
-  let sumaCantidad = 0; 
-  // MIRAR ESTO DE SUMACANTIDAD MÑAANA
-  // console.log(localSt.length);
+
+  let sumaCantidad = 0;
 
   if (localSt && localSt.length > 0) {
     contenedorIngresosTabla.innerHTML = "";
@@ -77,7 +76,7 @@ const agregarIngresos = () => {
     });
   } else {
     contenedorIngresosTabla.innerHTML = "";
-    
+
     window.localStorage.setItem("ingresosTotales", sumaCantidad);
     contenedorIngresosTabla.innerHTML = `
     <tr class="table_row">
@@ -149,35 +148,27 @@ const restarGastos = () => {
   }
 };
 
-class Dato{
-
-    constructor(tipo,concepto,cantidad){
-        
-        this.tipo = tipo;
-        this.concepto=concepto;
-        this.cantidad=cantidad;
-
-    }
-    
+class Dato {
+  constructor(tipo, concepto, cantidad) {
+    this.tipo = tipo;
+    this.concepto = concepto;
+    this.cantidad = cantidad;
+  }
 }
 
-class Ingreso extends Dato{
-    constructor(id,tipo,concepto,cantidad){
-        super(tipo,concepto,cantidad);
-        this.id = id;
-
-    }
+class Ingreso extends Dato {
+  constructor(id, tipo, concepto, cantidad) {
+    super(tipo, concepto, cantidad);
+    this.id = id;
+  }
 }
 
-class Gasto extends Dato{
-    constructor(id,tipo,concepto,cantidad){
-        super(tipo,concepto,cantidad);
-        this.id = id;
-
-    }
+class Gasto extends Dato {
+  constructor(id, tipo, concepto, cantidad) {
+    super(tipo, concepto, cantidad);
+    this.id = id;
+  }
 }
-
-// export default {Dato, Gasto, Ingreso};
 
 const guardarPresupuesto = () => {
   let contenedorCantidadDisponible = document.getElementById(
@@ -193,8 +184,8 @@ const guardarPresupuesto = () => {
 
     contenedorCantidadDisponible.innerHTML = `${presupuestoLS} €`;
   } else {
-    window.localStorage.setItem("presupuestoFinal",0);
-    window.localStorage.setItem("id",0);    
+    window.localStorage.setItem("presupuestoFinal", 0);
+    window.localStorage.setItem("id", 0);
     contenedorCantidadDisponible.innerHTML = `-`;
   }
 };
@@ -203,46 +194,37 @@ let ingresoGasto = () => {
   existeLocalStorage();
   tick.addEventListener("click", () => {
     let id = window.localStorage.getItem("id");
-    // window.localStorage.clear();
-    
-    
+
     if (concepto.value !== "" && cantidad.value !== "") {
       if (tipo.value === "mas") {
-        
-        let ingreso = new Ingreso(id,tipo.value, concepto.value, cantidad.value);
+        let ingreso = new Ingreso(
+          id,
+          tipo.value,
+          concepto.value,
+          cantidad.value
+        );
 
         let ingresosLocalStorage = JSON.parse(localStorage.getItem("ingresos"));
         ingresosLocalStorage.push(ingreso);
         localStorage.setItem("ingresos", JSON.stringify(ingresosLocalStorage));
 
         agregarIngresos();
-        
-        
-        
-
       } else if (tipo.value === "menos") {
-        let gasto = new Gasto(id,tipo.value, concepto.value, cantidad.value);
+        let gasto = new Gasto(id, tipo.value, concepto.value, cantidad.value);
 
         let gastosLocalStorage = JSON.parse(localStorage.getItem("gastos"));
         gastosLocalStorage.push(gasto);
         localStorage.setItem("gastos", JSON.stringify(gastosLocalStorage));
 
         restarGastos();
-        
-        
-
       }
-      
+
       id++;
-      window.localStorage.setItem("id",id);
-
-
-
+      window.localStorage.setItem("id", id);
     }
     concepto.value = "";
     cantidad.value = "";
     guardarPresupuesto();
-
   });
 };
 
@@ -258,67 +240,52 @@ let eliminarTodo = () => {
   });
 };
 
-const eliminarElemento = ()=>{
-tablaIngresos.addEventListener("click", (e) => {
-  if (e.target.matches(".btn-eliminar")) {
-    let id = e.target.closest(".table_row").id;
-
-    let LS = JSON.parse(window.localStorage.getItem("ingresos"));
-    
-
-    let nuevoLS = LS.filter((elemento) => {
-      let idLS = elemento.id;
-
-      if (id != idLS && LS.length > 0) {
-        return elemento;       
-      } 
-
-    });
-    
-    
-    let nuevoLSJSON = JSON.stringify(nuevoLS);
-   
-    window.localStorage.setItem("ingresos",nuevoLSJSON);
-    
-    
-  }
-  
-  agregarIngresos();
-  guardarPresupuesto();
-
- 
-});
-
-tablaGastos.addEventListener("click", (e) => {
+const eliminarElemento = () => {
+  tablaIngresos.addEventListener("click", (e) => {
     if (e.target.matches(".btn-eliminar")) {
       let id = e.target.closest(".table_row").id;
-  
-      let LS = JSON.parse(window.localStorage.getItem("gastos"));
-      
-  
+
+      let LS = JSON.parse(window.localStorage.getItem("ingresos"));
+
       let nuevoLS = LS.filter((elemento) => {
         let idLS = elemento.id;
-  
+
         if (id != idLS && LS.length > 0) {
-          return elemento;       
-        } 
-  
+          return elemento;
+        }
       });
-      
-      
+
       let nuevoLSJSON = JSON.stringify(nuevoLS);
-     
-      window.localStorage.setItem("gastos",nuevoLSJSON);
-      
-      
+
+      window.localStorage.setItem("ingresos", nuevoLSJSON);
     }
-    
-    restarGastos();
+
+    agregarIngresos();
     guardarPresupuesto();
-  
-   
   });
 
+  tablaGastos.addEventListener("click", (e) => {
+    if (e.target.matches(".btn-eliminar")) {
+      let id = e.target.closest(".table_row").id;
+
+      let LS = JSON.parse(window.localStorage.getItem("gastos"));
+
+      let nuevoLS = LS.filter((elemento) => {
+        let idLS = elemento.id;
+
+        if (id != idLS && LS.length > 0) {
+          return elemento;
+        }
+      });
+
+      let nuevoLSJSON = JSON.stringify(nuevoLS);
+
+      window.localStorage.setItem("gastos", nuevoLSJSON);
+    }
+
+    restarGastos();
+    guardarPresupuesto();
+  });
 };
 
 existeLocalStorage();

@@ -14,8 +14,8 @@ const guardarPresupuesto = () => {
 
     contenedorCantidadDisponible.innerHTML = `${presupuestoLS} €`;
   } else {
-    window.localStorage.setItem("presupuestoFinal",0);
-    window.localStorage.setItem("id",0);    
+    window.localStorage.setItem("presupuestoFinal", 0);
+    window.localStorage.setItem("id", 0);
     contenedorCantidadDisponible.innerHTML = `-`;
   }
 };

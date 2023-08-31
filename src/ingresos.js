@@ -3,10 +3,8 @@ import { tablaIngresos, sumaIngresos } from "./variablesComunes";
 const agregarIngresos = () => {
   let contenedorIngresosTabla = document.getElementById("tabla_ingresos");
   let localSt = JSON.parse(localStorage.getItem("ingresos"));
-  // console.log(localSt[localSt.length-1].id);
-  let sumaCantidad = 0; 
-  // MIRAR ESTO DE SUMACANTIDAD MÑAANA
-  // console.log(localSt.length);
+
+  let sumaCantidad = 0;
 
   if (localSt && localSt.length > 0) {
     contenedorIngresosTabla.innerHTML = "";
@@ -47,7 +45,7 @@ const agregarIngresos = () => {
     });
   } else {
     contenedorIngresosTabla.innerHTML = "";
-    
+
     window.localStorage.setItem("ingresosTotales", sumaCantidad);
     contenedorIngresosTabla.innerHTML = `
     <tr class="table_row">
