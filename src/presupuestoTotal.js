@@ -1,3 +1,5 @@
+import { existeLocalStorage } from "./localStorage";
+
 const guardarPresupuesto = () => {
   let contenedorCantidadDisponible = document.getElementById(
     "cantidad_disponible"
@@ -12,6 +14,8 @@ const guardarPresupuesto = () => {
 
     contenedorCantidadDisponible.innerHTML = `${presupuestoLS} €`;
   } else {
+    window.localStorage.setItem("presupuestoFinal",0);
+    window.localStorage.setItem("id",0);    
     contenedorCantidadDisponible.innerHTML = `-`;
   }
 };

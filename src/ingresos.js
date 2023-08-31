@@ -6,6 +6,7 @@ const agregarIngresos = () => {
   // console.log(localSt[localSt.length-1].id);
   let sumaCantidad = 0; 
   // MIRAR ESTO DE SUMACANTIDAD MÑAANA
+  // console.log(localSt.length);
 
   if (localSt && localSt.length > 0) {
     contenedorIngresosTabla.innerHTML = "";
@@ -47,7 +48,7 @@ const agregarIngresos = () => {
   } else {
     contenedorIngresosTabla.innerHTML = "";
     
-    // window.localStorage.setItem("ingresosTotales", sumaCantidad);
+    window.localStorage.setItem("ingresosTotales", sumaCantidad);
     contenedorIngresosTabla.innerHTML = `
     <tr class="table_row">
     <td>No hay ingresos</td>

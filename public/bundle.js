@@ -1,20 +1,23 @@
 'use strict';
 
 const existeLocalStorage = ()=>{
+    let ingresos = window.localStorage.getItem("ingresos");
+    let gastos = window.localStorage.getItem("gastos");
 
-    if(localStorage.length===0){
-        window.localStorage.setItem("ingresos",JSON.stringify([]));
+    if(localStorage.length===0 || (!ingresos && !gastos) || (ingresos.length===0 && gastos.length===0) ){
+    window.localStorage.setItem("ingresos",JSON.stringify([]));
         window.localStorage.setItem("gastos",JSON.stringify([]));
         window.localStorage.setItem("ingresosTotales",0);
         window.localStorage.setItem("gastosTotales",0);
         window.localStorage.setItem("id",0);
+        window.localStorage.setItem("presupuestoFinal",0);
         
 
     }
 
 };
 
-let tablaIngresos$1 = document.getElementById("tabla_ingresos");
+let tablaIngresos = document.getElementById("tabla_ingresos");
 let tablaGastos = document.getElementById("tabla_gastos");
 
 let formulario = document.forms["navegacion"];
@@ -33,6 +36,7 @@ const agregarIngresos = () => {
   // console.log(localSt[localSt.length-1].id);
   let sumaCantidad = 0; 
   // MIRAR ESTO DE SUMACANTIDAD MÑAANA
+  // console.log(localSt.length);
 
   if (localSt && localSt.length > 0) {
     contenedorIngresosTabla.innerHTML = "";
@@ -58,7 +62,7 @@ const agregarIngresos = () => {
       nuevoIngresoRow.setAttribute("id", `${element.id}`);
       nuevoIngresoCantidad.setAttribute("class", "padre");
 
-      tablaIngresos$1.appendChild(nuevoIngresoRow);
+      tablaIngresos.appendChild(nuevoIngresoRow);
       nuevoIngresoRow.appendChild(nuevoIngresoConcepto);
       nuevoIngresoRow.appendChild(nuevoIngresoCantidad);
       sumaCantidad += parseFloat(cantidad);
@@ -74,7 +78,7 @@ const agregarIngresos = () => {
   } else {
     contenedorIngresosTabla.innerHTML = "";
     
-    // window.localStorage.setItem("ingresosTotales", sumaCantidad);
+    window.localStorage.setItem("ingresosTotales", sumaCantidad);
     contenedorIngresosTabla.innerHTML = `
     <tr class="table_row">
     <td>No hay ingresos</td>
@@ -109,7 +113,7 @@ const restarGastos = () => {
               <p class="eliminar">- ${parseFloat(cantidad).toLocaleString(
                 "es"
               )} €</p>
-              <p class="absoluto"><img src="https://img.icons8.com/?size=100&id=46&format=png" alt="" style="height: 1.3em;"></p>
+              <p class="absoluto"><img class="btn-eliminar" src="https://img.icons8.com/?size=100&id=46&format=png" alt="" style="height: 1.3em;"></p>
               `;
 
       nuevoGastoRow.setAttribute("class", "table_row");
@@ -131,7 +135,7 @@ const restarGastos = () => {
     });
   } else {
     contenedorGastosTabla.innerHTML = "";
-
+    window.localStorage.setItem("gastosTotales", sumaCantidad);
     contenedorGastosTabla.innerHTML = `
       <tr class="table_row">
       <td>No hay ingresos</td>
@@ -189,6 +193,8 @@ const guardarPresupuesto = () => {
 
     contenedorCantidadDisponible.innerHTML = `${presupuestoLS} €`;
   } else {
+    window.localStorage.setItem("presupuestoFinal",0);
+    window.localStorage.setItem("id",0);    
     contenedorCantidadDisponible.innerHTML = `-`;
   }
 };
@@ -252,20 +258,13 @@ let eliminarTodo = () => {
   });
 };
 
-ingresoGasto();
-agregarIngresos();
-restarGastos();
-eliminarTodo();
-guardarPresupuesto();
-
-let tablaIngresos = document.getElementById("tabla_ingresos");
-
+const eliminarElemento = ()=>{
 tablaIngresos.addEventListener("click", (e) => {
   if (e.target.matches(".btn-eliminar")) {
     let id = e.target.closest(".table_row").id;
 
     let LS = JSON.parse(window.localStorage.getItem("ingresos"));
-    console.log(LS);
+    
 
     let nuevoLS = LS.filter((elemento) => {
       let idLS = elemento.id;
@@ -276,14 +275,56 @@ tablaIngresos.addEventListener("click", (e) => {
 
     });
     
-    console.log(nuevoLS);
+    
     let nuevoLSJSON = JSON.stringify(nuevoLS);
-    console.log(nuevoLSJSON);
+   
     window.localStorage.setItem("ingresos",nuevoLSJSON);
-
+    
+    
   }
+  
   agregarIngresos();
   guardarPresupuesto();
 
  
 });
+
+tablaGastos.addEventListener("click", (e) => {
+    if (e.target.matches(".btn-eliminar")) {
+      let id = e.target.closest(".table_row").id;
+  
+      let LS = JSON.parse(window.localStorage.getItem("gastos"));
+      
+  
+      let nuevoLS = LS.filter((elemento) => {
+        let idLS = elemento.id;
+  
+        if (id != idLS && LS.length > 0) {
+          return elemento;       
+        } 
+  
+      });
+      
+      
+      let nuevoLSJSON = JSON.stringify(nuevoLS);
+     
+      window.localStorage.setItem("gastos",nuevoLSJSON);
+      
+      
+    }
+    
+    restarGastos();
+    guardarPresupuesto();
+  
+   
+  });
+
+};
+
+existeLocalStorage();
+ingresoGasto();
+agregarIngresos();
+restarGastos();
+eliminarTodo();
+guardarPresupuesto();
+eliminarElemento();

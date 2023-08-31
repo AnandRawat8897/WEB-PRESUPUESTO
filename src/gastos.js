@@ -26,7 +26,7 @@ const restarGastos = () => {
               <p class="eliminar">- ${parseFloat(cantidad).toLocaleString(
                 "es"
               )} €</p>
-              <p class="absoluto"><img src="https://img.icons8.com/?size=100&id=46&format=png" alt="" style="height: 1.3em;"></p>
+              <p class="absoluto"><img class="btn-eliminar" src="https://img.icons8.com/?size=100&id=46&format=png" alt="" style="height: 1.3em;"></p>
               `;
 
       nuevoGastoRow.setAttribute("class", "table_row");
@@ -48,7 +48,7 @@ const restarGastos = () => {
     });
   } else {
     contenedorGastosTabla.innerHTML = "";
-
+    window.localStorage.setItem("gastosTotales", sumaCantidad);
     contenedorGastosTabla.innerHTML = `
       <tr class="table_row">
       <td>No hay ingresos</td>
